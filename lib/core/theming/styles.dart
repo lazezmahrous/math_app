@@ -10,8 +10,8 @@ class TextStyles {
     color: Colors.black,
   );
 
-  static TextStyle font32BlueBold = TextStyle(
-    fontSize: 32.sp,
+  static TextStyle font25BlueBold = TextStyle(
+    fontSize: 25.sp,
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.mainBlue,
   );

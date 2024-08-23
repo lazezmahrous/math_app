@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 
-class DoctorImageAndText extends StatelessWidget {
-  const DoctorImageAndText({super.key});
+class StudentImageAndText extends StatelessWidget {
+  const StudentImageAndText({super.key});
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SvgPicture.asset(
-          'assets/svgs/docdoc_logo_low_opacity.svg',
+        Image.asset(
+          'assets/images/maths_board_background.png',
           color: ColorsManager.mainBlue.withOpacity(0.2),
         ),
         Container(
@@ -26,17 +27,19 @@ class DoctorImageAndText extends StatelessWidget {
               stops: const [0.14, 0.4],
             ),
           ),
-          child: Image.asset('assets/images/onboarding_doctor.png'),
+          child: Image.asset(
+            'assets/images/student_image.png',
+          ),
         ),
         Positioned(
-          bottom: 20,
+          bottom: 10,
           left: 0,
           right: 0,
           child: Text(
-            'Best Doctor Appointment App',
+            'أفضل منهج لتأسيس الرياضيات',
             textAlign: TextAlign.center,
-            style: TextStyles.font32BlueBold.copyWith(
-              height: 1.4,
+            style: TextStyles.font25BlueBold.copyWith(
+              height: 1.2,
             ),
           ),
         ),
