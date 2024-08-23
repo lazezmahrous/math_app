@@ -38,6 +38,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   hexcolor: ^3.0.1
   cupertino_icons: ^1.0.8
+  cart_stepper: ^4.3.0
 
 dev_dependencies:
   flutter_test:
