@@ -5,7 +5,6 @@ import 'package:math_app/core/theming/styles.dart';
 
 import '../../../../core/routing/routers.dart';
 
-
 class GetStartedButton extends StatelessWidget {
   const GetStartedButton({super.key});
   @override
@@ -23,7 +22,7 @@ class GetStartedButton extends StatelessWidget {
         ),
       ),
       child: Text(
-        'Get Started',
+        'لنبدأ',
         style: TextStyles.font16WhiteSemiBold,
       ),
     );

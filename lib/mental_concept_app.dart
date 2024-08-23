@@ -14,7 +14,9 @@ class MentalConceptApp extends StatelessWidget {
       designSize: const Size(375, 812),
       child: MaterialApp(
         title: 'Mental Concept',
+        
         theme: ThemeData(
+          fontFamily: 'Noto',
           primaryColor: ColorsManager.mainBlue,
           scaffoldBackgroundColor: Colors.white,
         ),
