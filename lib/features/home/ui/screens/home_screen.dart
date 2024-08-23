@@ -30,11 +30,11 @@ class HomeScreen extends StatelessWidget {
                 const ShowScore(),
                 verticalSpace(40),
                 const SettingsOfGameWidget(
-                  SectionName: 'Operation Count',
+                  sectionName: 'Operation Count',
                 ),
                 verticalSpace(20),
                 const SettingsOfGameWidget(
-                  SectionName: 'Numbers Speed',
+                  sectionName: 'Numbers Speed',
                 ),
               ],
             ),
