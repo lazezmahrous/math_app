@@ -40,6 +40,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   cart_stepper: ^4.3.0
   flutter_bloc: ^8.1.6
+  provider: ^6.1.2
+  audioplayers: ^5.2.1
+  shared_preferences: ^2.3.2
+  liquid_progress_indicator_v2: ^0.5.0
 
 dev_dependencies:
   flutter_test:
@@ -66,8 +70,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/gifs/
     - assets/fonts/
     - assets/svgs/
+    - assets/sounds/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
