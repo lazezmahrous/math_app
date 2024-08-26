@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:math_app/core/helpers/extensions.dart';
 import 'package:math_app/core/helpers/spacing.dart';
 import 'package:math_app/core/theming/styles.dart';
 import 'package:math_app/features/onboarding/ui/widgets/app_logo_and_named.dart';
 
+import '../../../../core/routing/routers.dart';
+import '../../../../core/widgets/app_text_button.dart';
 import '../widgets/student_image_and_text.dart';
-import '../widgets/get_started_button.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -35,7 +37,12 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                 ),
                 verticalSpace(30),
-                const GetStartedButton(),
+                AppTextButton(
+                    size: const Size(double.infinity, 50),
+                    text: 'لنبدأ',
+                    onPressed: () {
+                      context.pushNamed(Routes.homeScreen);
+                    })
               ],
             ),
           ),

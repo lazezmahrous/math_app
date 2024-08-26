@@ -51,6 +51,11 @@ class TextStyles {
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.gray,
   );
+  static TextStyle font14WhiteBold = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: Colors.white,
+  );
 
   static TextStyle font12GrayRegular = TextStyle(
     fontSize: 12.sp,
@@ -140,5 +145,23 @@ class TextStyles {
     fontSize: 18.sp,
     fontWeight: FontWeightHelper.medium,
     color: Colors.white,
+  );
+  static TextStyle font22WhiteExtraBold = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeightHelper.extraBold,
+    fontSize: 22.sp,
+    letterSpacing: .5,
+  );
+  static TextStyle font15WhiteExtraBold = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeightHelper.extraBold,
+    fontSize: 15.sp,
+    letterSpacing: .5,
+  );
+  static TextStyle font30BlackExtraBold = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeightHelper.bold,
+    fontSize: 30.sp,
+    letterSpacing: .5,
   );
 }
