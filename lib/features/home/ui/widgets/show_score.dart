@@ -71,7 +71,18 @@ class ShowScore extends StatelessWidget {
                           ),
                         ],
                       ),
-                      verticalSpace(20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Counter Score: ${value.counterScore}',
+                            style: TextStyles.font15WhiteExtraBold.copyWith(
+                              letterSpacing: 2.h,
+                            ),
+                          ),
+                        ],
+                      ),
+                      verticalSpace(10),
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

@@ -6,7 +6,7 @@ import 'package:math_app/core/theming/styles.dart';
 import 'package:math_app/features/onboarding/ui/widgets/app_logo_and_named.dart';
 
 import '../../../../core/routing/routers.dart';
-import '../../../../core/widgets/app_text_button.dart';
+import '../../../../core/widgets/app_gradient_button.dart';
 import '../widgets/student_image_and_text.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -23,7 +23,7 @@ class OnboardingScreen extends StatelessWidget {
                 const AppLogoAndNamed(),
                 verticalSpace(80),
                 const StudentImageAndText(),
-                verticalSpace(30),
+                verticalSpace(15),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.w),
                   child: Column(
@@ -37,7 +37,7 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                 ),
                 verticalSpace(30),
-                AppTextButton(
+                AppGradientButton(
                     size: const Size(double.infinity, 50),
                     text: 'لنبدأ',
                     onPressed: () {

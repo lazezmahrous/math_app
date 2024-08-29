@@ -10,45 +10,43 @@ class SelectOperation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<GameProvider>(
       builder: (context, value, child) {
-        return Card(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Operation :', style: TextStyles.font30BlackExtraBold),
-              Row(
-                children: [
-                  PopupMenuButton<String>(
-                    onSelected: (String result) {
-                      Provider.of<GameProvider>(context, listen: false)
-                          .setOperation(result);
-                    },
-                    itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<String>>[
-                      const PopupMenuItem<String>(
-                        value: 'Add',
-                        child: Text('Addition (+)'),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'Subtract',
-                        child: Text('Subtraction (-)'),
-                      ),
-                    ],
-                    child: Row(
-                      children: [
-                        Text(
-                          value.operation.isEmpty
-                              ? 'Select Operation'
-                              : value.operation,
-                          style: TextStyles.font14DarkBlueBold,
-                        ),
-                        const Icon(Icons.arrow_drop_down),
-                      ],
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Operation', style: TextStyles.font20BlackExtraBold),
+            Row(
+              children: [
+                PopupMenuButton<String>(
+                  onSelected: (String result) {
+                    Provider.of<GameProvider>(context, listen: false)
+                        .setOperation(result);
+                  },
+                  itemBuilder: (BuildContext context) =>
+                      <PopupMenuEntry<String>>[
+                    const PopupMenuItem<String>(
+                      value: 'Add',
+                      child: Text('Addition (+)'),
                     ),
+                    const PopupMenuItem<String>(
+                      value: 'Subtract',
+                      child: Text('Subtraction (-)'),
+                    ),
+                  ],
+                  child: Row(
+                    children: [
+                      Text(
+                        value.operation.isEmpty
+                            ? 'Select Operation'
+                            : value.operation,
+                        style: TextStyles.font14DarkBlueBold,
+                      ),
+                      const Icon(Icons.arrow_drop_down),
+                    ],
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         );
       },
     );

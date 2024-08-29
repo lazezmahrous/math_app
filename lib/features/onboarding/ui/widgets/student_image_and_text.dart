@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
@@ -12,7 +10,7 @@ class StudentImageAndText extends StatelessWidget {
     return Stack(
       children: [
         Image.asset(
-          'assets/images/maths_board_background.png',
+          'assets/images/education_pattern_background.png',
           color: ColorsManager.mainBlue.withOpacity(0.2),
         ),
         Container(
@@ -28,7 +26,7 @@ class StudentImageAndText extends StatelessWidget {
             ),
           ),
           child: Image.asset(
-            'assets/images/student_image.png',
+            'assets/images/cartoon_animal.png',
           ),
         ),
         Positioned(

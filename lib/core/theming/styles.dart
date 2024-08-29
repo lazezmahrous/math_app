@@ -158,10 +158,10 @@ class TextStyles {
     fontSize: 15.sp,
     letterSpacing: .5,
   );
-  static TextStyle font30BlackExtraBold = TextStyle(
+  static TextStyle font20BlackExtraBold = TextStyle(
     color: Colors.black,
     fontWeight: FontWeightHelper.bold,
-    fontSize: 30.sp,
+    fontSize: 20.sp,
     letterSpacing: .5,
   );
 }

@@ -6,6 +6,7 @@ class GameProvider with ChangeNotifier {
   int _numbersSpeed = 0;
   int _additionScore = 0;
   int _subtractionScore = 0;
+  int _counterScore = 0;
   String _operation = '';
   String _level = 'one';
 
@@ -13,6 +14,7 @@ class GameProvider with ChangeNotifier {
   int get numbersSpeed => _numbersSpeed;
   int get additionScore => _additionScore;
   int get subtractionScore => _subtractionScore;
+  int get counterScore => _counterScore;
   String get operation => _operation;
   String get level => _level;
 
@@ -38,8 +40,10 @@ class GameProvider with ChangeNotifier {
   Future<void> increaseScore() async {
     if (_operation == 'Add') {
       _additionScore++;
-    } else {
+    } else if (_operation == 'Subtract') {
       _subtractionScore++;
+    } else {
+      _counterScore++;
     }
     await _saveScores();
     notifyListeners();
