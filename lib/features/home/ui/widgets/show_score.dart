@@ -23,7 +23,8 @@ class ShowScore extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<GameProvider>(
       builder: (context, value, child) {
-        int res = value.additionScore + value.subtractionScore;
+        int res =
+            value.additionScore + value.subtractionScore + value.counterScore;
         return Container(
           width: width ?? 320.w,
           height: height ?? 180.h,
@@ -71,7 +72,18 @@ class ShowScore extends StatelessWidget {
                           ),
                         ],
                       ),
-                      verticalSpace(20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Counter Score: ${value.counterScore}',
+                            style: TextStyles.font15WhiteExtraBold.copyWith(
+                              letterSpacing: 2.h,
+                            ),
+                          ),
+                        ],
+                      ),
+                      verticalSpace(10),
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

@@ -1,5 +1,7 @@
 import 'package:cart_stepper/cart_stepper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:math_app/core/helpers/spacing.dart';
 import 'package:provider/provider.dart';
 import 'package:math_app/features/game/logic/providers/game_provider.dart';
 
@@ -25,40 +27,32 @@ class SettingsOfGameWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             color: ColorsManager.morelightGray,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                '${sectionName!} :',
-                style:TextStyles.font30BlackExtraBold
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Center(
-                      child: CartStepper(
-                        alwaysExpanded: true,
-                        style: const CartStepperStyle(),
-                        value: counter,
-                        stepper: 1,
-                        size: 40,
-                        didChangeCount: (count) {
-                          if (count <= 5) {
-                            if (sectionName == 'Operation Count') {
-                              provider.setOperationsCount(count);
-                            } else if (sectionName == 'Numbers Speed') {
-                              provider.setNumbersSpeed(count);
-                            }
-                          } else {
-                            print('Count exceeds 10');
-                          }
-                        },
-                      ),
-                    ),
+              Text(sectionName!, style: TextStyles.font20BlackExtraBold),
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Center(
+                  child: CartStepper(
+                    alwaysExpanded: true,
+                    style: const CartStepperStyle(),
+                    value: counter,
+                    stepper: 1,
+                    size: 35.w,
+                    didChangeCount: (count) {
+                      if (count <= 5) {
+                        if (sectionName == 'Operation Count') {
+                          provider.setOperationsCount(count);
+                        } else if (sectionName == 'Numbers Speed') {
+                          provider.setNumbersSpeed(count);
+                        }
+                      } else {
+                        print('Count exceeds 10');
+                      }
+                    },
                   ),
-                ],
+                ),
               ),
             ],
           ),

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:math_app/core/helpers/extensions.dart';
-import 'package:provider/provider.dart';
-
+import 'package:math_app/core/helpers/spacing.dart';
 import '../../../../core/routing/routers.dart';
-import '../../../../core/widgets/app_text_button.dart';
-import 'package:math_app/features/game/logic/providers/game_provider.dart';
+import '../../../../core/widgets/app_gradient_button.dart';
 
 class SuccessScreenItemWidget extends StatefulWidget {
   const SuccessScreenItemWidget({super.key});
@@ -18,32 +16,31 @@ class SuccessScreenItemWidget extends StatefulWidget {
 class _SuccessScreenItemWidgetState extends State<SuccessScreenItemWidget> {
   @override
   Widget build(BuildContext context) {
-    // احصل على GameProvider من السياق
-    final gameProvider = Provider.of<GameProvider>(context);
-
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        AppTextButton(
-          size: Size(20.w, 30),
-          text: 'Home',
-          onPressed: () {
-            context.pushNamedAndRemoveUntil(
-              Routes.homeScreen,
-              predicate: (route) => false,
-            );
-          },
+        Expanded(
+          flex: 2,
+          child: AppGradientButton(
+            size: Size(20.w, 40.h),
+            text: 'Home',
+            onPressed: () {
+              context.pushNamedAndRemoveUntil(
+                Routes.homeScreen,
+                predicate: (route) => false,
+              );
+            },
+          ),
         ),
-        AppTextButton(
-          size: Size(20.w, 30),
-          text: 'Play Again',
-          onPressed: () {
-            // الوصول إلى القيم من gameProvider
-            final operationsCount = gameProvider.operationsCount;
-            final numbersSpeed = gameProvider.numbersSpeed;
-
-            context.pushReplacementToGameScreen(operationsCount, numbersSpeed);
-          },
+        horizontalSpace(10.w),
+        Expanded(
+          child: AppGradientButton(
+            size: Size(20.w, 40.h),
+            text: 'Play Again',
+            onPressed: () {
+              context.pushReplacementNamed(Routes.gameScreen);
+            },
+          ),
         ),
       ],
     );

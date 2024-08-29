@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/theming/styles.dart';
 import '../../../game/logic/providers/game_provider.dart';
 
 class SelectLevel extends StatelessWidget {
@@ -12,28 +13,33 @@ class SelectLevel extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('level'),
+            Text(
+              'level',
+              style: TextStyles.font20BlackExtraBold,
+            ),
             Row(
               children: [
                 PopupMenuButton<String>(
                   onSelected: (String result) {
                     Provider.of<GameProvider>(context, listen: false)
-                        .setOperation(result);
+                        .changeLevel(result);
                   },
                   itemBuilder: (BuildContext context) =>
                       <PopupMenuEntry<String>>[
                     const PopupMenuItem<String>(
                       value: 'levelOne',
-                      child: Text('Level One (1)'),
+                      child: Text('Level One (0 To 5)'),
                     ),
                     const PopupMenuItem<String>(
                       value: 'levelTow',
-                      child: Text('Level Tow (2)'),
+                      child: Text('Level Tow (5 To 9)'),
                     ),
                   ],
                   child: Row(
                     children: [
-                      Text(value.level.isEmpty ? 'Change Level' : value.level),
+                      Text(
+                        value.level.isEmpty ? 'Change Level' : value.level,
+                      ),
                       const Icon(Icons.arrow_drop_down),
                     ],
                   ),

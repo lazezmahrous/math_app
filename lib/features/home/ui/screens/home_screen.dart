@@ -31,22 +31,24 @@ class HomeScreen extends StatelessWidget {
                     ),
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Welcome Back 👋',
-                          style: TextStyles.font25BlueBold,
-                        ),
-                        verticalSpace(20),
-                        ShowScore(
-                          height: 130.h,
-                          colors: [
-                            ColorsManager.moreDarkBlue,
-                            ColorsManager.secondBlueColor,
-                          ],
-                        ),
-                      ],
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Welcome Back 👋',
+                            style: TextStyles.font25BlueBold,
+                          ),
+                          verticalSpace(20),
+                          ShowScore(
+                            height: 130.h,
+                            colors: [
+                              ColorsManager.moreDarkBlue,
+                              ColorsManager.secondBlueColor,
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

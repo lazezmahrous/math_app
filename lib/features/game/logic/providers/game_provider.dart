@@ -6,6 +6,7 @@ class GameProvider with ChangeNotifier {
   int _numbersSpeed = 0;
   int _additionScore = 0;
   int _subtractionScore = 0;
+  int _counterScore = 0;
   String _operation = '';
   String _level = 'one';
 
@@ -13,6 +14,7 @@ class GameProvider with ChangeNotifier {
   int get numbersSpeed => _numbersSpeed;
   int get additionScore => _additionScore;
   int get subtractionScore => _subtractionScore;
+  int get counterScore => _counterScore;
   String get operation => _operation;
   String get level => _level;
 
@@ -38,9 +40,15 @@ class GameProvider with ChangeNotifier {
   Future<void> increaseScore() async {
     if (_operation == 'Add') {
       _additionScore++;
-    } else {
+    } else if (_operation == 'Subtract') {
       _subtractionScore++;
-    }
+    } 
+    await _saveScores();
+    notifyListeners();
+  }
+
+  Future<void> increaseCounterScore() async {
+    _counterScore++;
     await _saveScores();
     notifyListeners();
   }
@@ -50,6 +58,7 @@ class GameProvider with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('additionScore', _additionScore);
     prefs.setInt('subtractionScore', _subtractionScore);
+    prefs.setInt('counterScore', _counterScore);
   }
 
   // Load scores from SharedPreferences
@@ -57,6 +66,7 @@ class GameProvider with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     _additionScore = prefs.getInt('additionScore') ?? 0;
     _subtractionScore = prefs.getInt('subtractionScore') ?? 0;
+    _counterScore = prefs.getInt('counterScore') ?? 0;
     notifyListeners();
   }
 

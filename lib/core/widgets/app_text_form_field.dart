@@ -20,6 +20,8 @@ class AppTextFormField extends StatelessWidget {
   final Color? fieldBackGroundColor;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
+  final ValueChanged<String>? onChanged;  // إضافة هنا
+
   const AppTextFormField({
     super.key,
     this.contentPadding,
@@ -35,7 +37,9 @@ class AppTextFormField extends StatelessWidget {
     this.fieldBackGroundColor,
     this.controller,
     this.keyboardType,
+    this.onChanged,  // إضافة هنا
   });
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -74,6 +78,7 @@ class AppTextFormField extends StatelessWidget {
       ),
       obscureText: isObscureText ?? false,
       style: TextStyles.font14DarkBlueMedium,
+      onChanged: onChanged,  // إضافة هنا
     );
   }
 }

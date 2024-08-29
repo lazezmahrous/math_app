@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:math_app/core/routing/routers.dart';
 import 'package:math_app/features/game/ui/screens/enter_result_screen.dart';
 import 'package:math_app/features/game/ui/screens/failure_screen.dart';
 import 'package:math_app/features/game/ui/screens/success_screen.dart';
 import 'package:math_app/features/learn_counter/ui/screens/learn_counter.dart';
+import 'package:math_app/features/stories/logic/providers/story_provider.dart';
+import 'package:math_app/features/stories/ui/screens/play_and_reading_story.dart';
 import 'package:math_app/features/stories/ui/screens/stories.dart';
 import 'package:provider/provider.dart';
-import '../../features/game/logic/providers/game_provider.dart';
 import '../../features/game/ui/screens/game_screen.dart';
 import '../../features/home/ui/screens/home_screen.dart';
 import '../../features/onboarding/ui/screens/onboarding_screen.dart';
@@ -43,11 +43,15 @@ class AppRouter {
         );
       case Routes.learnCounter:
         return MaterialPageRoute(
-          builder: (_) => const LearnCounter(),
+          builder: (_) => LearnCounter(),
         );
       case Routes.stories:
         return MaterialPageRoute(
-          builder: (_) => const Stories(),
+          builder: (_) => Stories(),
+        );
+      case Routes.readingStory:
+        return MaterialPageRoute(
+          builder: (_) => const PlayAndReadingStory(),
         );
       case Routes.failureScreen:
         return MaterialPageRoute(
