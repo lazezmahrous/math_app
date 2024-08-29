@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:math_app/core/helpers/extensions.dart';
@@ -22,17 +21,16 @@ class _FlashTimingNumbersWidgetState extends State<FlashTimingNumbersWidget> {
   int? secondNumber;
   int? result;
   int count = 0;
-  late String _operation;
 
   @override
   void initState() {
     super.initState();
     final provider = Provider.of<GameProvider>(context, listen: false);
-    _operation = provider.operation;
     startGame(provider.operationsCount, provider.numbersSpeed);
   }
 
   int plusOperations(int randomNumber) {
+    print('random number of Plus + $randomNumber');
     List<int> operations =
         GameNumbersModel().zeroToFiveAdditionOperations[randomNumber]!;
     operations.shuffle();
@@ -45,42 +43,57 @@ class _FlashTimingNumbersWidgetState extends State<FlashTimingNumbersWidget> {
   }
 
   int negitiveOperations(int randomNumber) {
+    print('random number of negitive + $randomNumber');
+
     List<int> operations =
         GameNumbersModel().zeroToFiveSubtractionOperations[randomNumber]!;
     operations.shuffle();
+
     firstNumber = randomNumber;
     secondNumber = operations.first;
-    result = randomNumber - operations.first;
+    if (firstNumber! < secondNumber!) {
+      result = secondNumber! - firstNumber!;
+    } else {
+      result = firstNumber! - secondNumber!;
+    }
+
     print(
         'First number: $firstNumber , Second number: $secondNumber, Result: $result');
     return lastNumber = result!;
   }
 
   Future<void> generateNumbersGame(int operationCount, int numbersSpeed) async {
-    final random = Random(); // إنشاء كائن للحصول على أرقام عشوائية
+    final provider = Provider.of<GameProvider>(context, listen: false);
 
     for (int i = 0; i < operationCount; i++) {
+      num.shuffle();
+      int randomNumber = num.first;
+      if (count == 0) {
+        print(' =========== > 1');
+        randomNumber = num.first;
+      } else {
+        randomNumber = firstNumber!;
+      }
       count++;
 
-      int randomNumber;
-      // اختيار رقم عشوائي غير صفر
-      if (num.length > 1) {
-        randomNumber = num[random.nextInt(num.length)];
-      } else {
-        randomNumber =
-            num.first; // التعامل مع حالة وجود رقم واحد فقط في القائمة
-      }
-
-      // تحديد العملية بناءً على عدد مرات التكرار
-      if (i % 2 == 0) {
-        Provider.of<GameProvider>(context, listen: false).setOperation('Add');
+      if (provider.operation.isEmpty || provider.operation == 'Shuffle') {
+        if (i % 2 == 0) {
+          provider.setOperation('Add');
+          num.shuffle();
+          lastNumber = plusOperations(lastNumber);
+          print('lastNumber $lastNumber');
+        } else {
+          provider.setOperation('Subtract');
+          num.shuffle();
+          lastNumber = negitiveOperations(lastNumber);
+          print('lastNumber $lastNumber');
+        }
+      } else if (provider.operation == 'Add') {
         num.shuffle();
-        lastNumber = plusOperations(randomNumber);
+        lastNumber = plusOperations(lastNumber);
       } else {
-        Provider.of<GameProvider>(context, listen: false)
-            .setOperation('Subtract');
         num.shuffle();
-        lastNumber = negitiveOperations(randomNumber);
+        lastNumber = negitiveOperations(lastNumber);
       }
 
       setState(() {

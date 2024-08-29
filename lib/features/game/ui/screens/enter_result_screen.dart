@@ -23,16 +23,25 @@ class _EnterResultScreenState extends State<EnterResultScreen> {
   @override
   void initState() {
     super.initState();
+
+    // خلط الأرقام
     levelOnerandomNumbers.shuffle();
     levelTowrandomNumbers.shuffle();
 
+    // إزالة النتيجة من القوائم قبل التعامل معها
+    levelOnerandomNumbers.remove(widget.result);
+    levelTowrandomNumbers.remove(widget.result);
+
+    // أخذ أول 3 أرقام من كل قائمة
     levelOnerandomNumbers = levelOnerandomNumbers.take(3).toList();
     levelTowrandomNumbers = levelTowrandomNumbers.take(3).toList();
 
-    levelOnerandomNumbers.addAll([widget.result]);
-    levelOnerandomNumbers.shuffle();
+    // إضافة النتيجة إلى القوائم بعد أخذ 3 أرقام
+    levelOnerandomNumbers.add(widget.result);
+    levelTowrandomNumbers.add(widget.result);
 
-    levelTowrandomNumbers.addAll([widget.result]);
+    // خلط القوائم بعد إضافة النتيجة
+    levelOnerandomNumbers.shuffle();
     levelTowrandomNumbers.shuffle();
   }
 

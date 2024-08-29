@@ -42,9 +42,13 @@ class GameProvider with ChangeNotifier {
       _additionScore++;
     } else if (_operation == 'Subtract') {
       _subtractionScore++;
-    } else {
-      _counterScore++;
-    }
+    } 
+    await _saveScores();
+    notifyListeners();
+  }
+
+  Future<void> increaseCounterScore() async {
+    _counterScore++;
     await _saveScores();
     notifyListeners();
   }
@@ -54,6 +58,7 @@ class GameProvider with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('additionScore', _additionScore);
     prefs.setInt('subtractionScore', _subtractionScore);
+    prefs.setInt('counterScore', _counterScore);
   }
 
   // Load scores from SharedPreferences
@@ -61,6 +66,7 @@ class GameProvider with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     _additionScore = prefs.getInt('additionScore') ?? 0;
     _subtractionScore = prefs.getInt('subtractionScore') ?? 0;
+    _counterScore = prefs.getInt('counterScore') ?? 0;
     notifyListeners();
   }
 

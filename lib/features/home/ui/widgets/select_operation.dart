@@ -31,6 +31,10 @@ class SelectOperation extends StatelessWidget {
                       value: 'Subtract',
                       child: Text('Subtraction (-)'),
                     ),
+                    const PopupMenuItem<String>(
+                      value: 'Shuffle',
+                      child: Text('Shuffle (+) & (-)'),
+                    ),
                   ],
                   child: Row(
                     children: [
