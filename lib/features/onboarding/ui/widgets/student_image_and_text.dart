@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
+import '../../../../generated/l10n.dart';
 
 class StudentImageAndText extends StatelessWidget {
   const StudentImageAndText({super.key});
@@ -34,7 +35,7 @@ class StudentImageAndText extends StatelessWidget {
           left: 0,
           right: 0,
           child: Text(
-            'أفضل منهج لتأسيس الرياضيات',
+            S.of(context).onboard_title_tow,
             textAlign: TextAlign.center,
             style: TextStyles.font25BlueBold.copyWith(
               height: 1.2,

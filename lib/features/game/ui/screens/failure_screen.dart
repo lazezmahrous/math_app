@@ -4,6 +4,7 @@ import 'package:math_app/core/services/play_sound.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/colors.dart';
+import '../../../../generated/l10n.dart';
 import '../widgets/success_screen_item_widget.dart';
 
 class FailureScreen extends StatefulWidget {
@@ -41,9 +42,9 @@ class _FailureScreenState extends State<FailureScreen> {
               children: [
                 Image.asset('assets/gifs/failure.gif'),
                 verticalSpace(50),
-                const Text(
-                  'Failure!',
-                  style: TextStyle(
+                Text(
+                  S.of(context).feature_failure_screen,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 40,
                   ),

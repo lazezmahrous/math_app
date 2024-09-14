@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:math_app/core/helpers/extensions.dart';
 import 'package:math_app/core/theming/colors.dart';
 import 'package:provider/provider.dart';
+import '../../../../core/services/convert_to_arabic_numbers.dart';
 import '../../../../core/services/play_sound.dart';
+import '../../../../generated/l10n.dart';
 import '../../data/models/game_numbers_model.dart';
 import '../../logic/providers/game_provider.dart';
 
@@ -15,7 +17,9 @@ class FlashTimingNumbersWidget extends StatefulWidget {
 }
 
 class _FlashTimingNumbersWidgetState extends State<FlashTimingNumbersWidget> {
-  List<int> num = [1, 2, 3, 4, 5]; // تصفية الصفر من القائمة
+  List<int> numForLevelOne = [0, 1, 2, 3, 4, 5];
+  List<int> numForLevelTow = [6, 7, 8, 9];
+
   int lastNumber = 0;
   int? firstNumber;
   int? secondNumber;
@@ -25,14 +29,25 @@ class _FlashTimingNumbersWidgetState extends State<FlashTimingNumbersWidget> {
   @override
   void initState() {
     super.initState();
+    numForLevelOne.shuffle();
+    numForLevelTow.shuffle();
     final provider = Provider.of<GameProvider>(context, listen: false);
+    lastNumber = provider.level == 'levelOne'
+        ? numForLevelOne.first
+        : numForLevelTow.first;
+
     startGame(provider.operationsCount, provider.numbersSpeed);
   }
 
   int plusOperations(int randomNumber) {
-    print('random number of Plus + $randomNumber');
-    List<int> operations =
-        GameNumbersModel().zeroToFiveAdditionOperations[randomNumber]!;
+    List<int> operations = [];
+    if (Provider.of<GameProvider>(context, listen: false).level == 'levelOne') {
+      operations =
+          GameNumbersModel().zeroToFiveAdditionOperations[randomNumber]!;
+    } else {
+      operations =
+          GameNumbersModel().sixToNineAdditionOperations[randomNumber]!;
+    }
     operations.shuffle();
     firstNumber = randomNumber;
     secondNumber = operations.first;
@@ -44,9 +59,14 @@ class _FlashTimingNumbersWidgetState extends State<FlashTimingNumbersWidget> {
 
   int negitiveOperations(int randomNumber) {
     print('random number of negitive + $randomNumber');
-
-    List<int> operations =
-        GameNumbersModel().zeroToFiveSubtractionOperations[randomNumber]!;
+    List<int> operations = [];
+    if (Provider.of<GameProvider>(context, listen: false).level == 'levelOne') {
+      operations =
+          GameNumbersModel().zeroToFiveSubtractionOperations[randomNumber]!;
+    } else {
+      operations =
+          GameNumbersModel().sixToNineSubtractionOperations[randomNumber]!;
+    }
     operations.shuffle();
 
     firstNumber = randomNumber;
@@ -64,44 +84,32 @@ class _FlashTimingNumbersWidgetState extends State<FlashTimingNumbersWidget> {
 
   Future<void> generateNumbersGame(int operationCount, int numbersSpeed) async {
     final provider = Provider.of<GameProvider>(context, listen: false);
-
     for (int i = 0; i < operationCount; i++) {
-      num.shuffle();
-      int randomNumber = num.first;
-      if (count == 0) {
-        print(' =========== > 1');
-        randomNumber = num.first;
-      } else {
-        randomNumber = firstNumber!;
-      }
+      numForLevelOne.shuffle();
+      numForLevelTow.shuffle();
       count++;
-
-      if (provider.operation.isEmpty || provider.operation == 'Shuffle') {
-        if (i % 2 == 0) {
-          provider.setOperation('Add');
-          num.shuffle();
-          lastNumber = plusOperations(lastNumber);
-          print('lastNumber $lastNumber');
-        } else {
-          provider.setOperation('Subtract');
-          num.shuffle();
-          lastNumber = negitiveOperations(lastNumber);
-          print('lastNumber $lastNumber');
-        }
-      } else if (provider.operation == 'Add') {
-        num.shuffle();
-        lastNumber = plusOperations(lastNumber);
+      if (i % 2 == 0) {
+        provider.setOperation('Add');
+        lastNumber = plusOperations(
+          lastNumber,
+        );
       } else {
-        num.shuffle();
-        lastNumber = negitiveOperations(lastNumber);
+        provider.setOperation('Subtract');
+        lastNumber = negitiveOperations(
+          lastNumber,
+        );
       }
-
       setState(() {
+        print('$lastNumber$firstNumber');
+
         firstNumber = lastNumber - secondNumber!;
         secondNumber = null;
         result = null;
       });
-      await Future.delayed(Duration(seconds: numbersSpeed));
+      if (count <= 1) {
+        await Future.delayed(Duration(seconds: numbersSpeed));
+      }
+
       setState(() {
         secondNumber = lastNumber - firstNumber!;
         result = lastNumber;
@@ -117,7 +125,6 @@ class _FlashTimingNumbersWidgetState extends State<FlashTimingNumbersWidget> {
       await Future.delayed(const Duration(seconds: 1));
     }
     await generateNumbersGame(operationCount, numbersSpeed);
-    print('result = $result');
     context.pushReplacementToEnterResult(result!);
   }
 
@@ -129,22 +136,26 @@ class _FlashTimingNumbersWidgetState extends State<FlashTimingNumbersWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (firstNumber != null && count == 1)
-            Text(
-              '$firstNumber', // عرض الرقم الأول
-              style: TextStyle(fontSize: 170.sp, color: ColorsManager.mainBlue),
-            ),
-          if (secondNumber != null)
-            Text(
-              '${Provider.of<GameProvider>(context, listen: false).operation == 'Add' ? '+' : '-'} $secondNumber', // عرض الرقم الثاني مع علامة الجمع أو الطرح
-              style: TextStyle(fontSize: 170.sp, color: ColorsManager.mainBlue),
-            ),
-        ],
-      ),
+    final locale = Localizations.localeOf(context);
+    final isArabic = locale.languageCode == 'ar';
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (firstNumber != null && count == 1)
+          Text(
+            isArabic
+                ? ConvertToArabicNumbers.convertToArabicNumbers(
+                    firstNumber.toString())
+                : ' $firstNumber',
+            style: TextStyle(fontSize: 250.sp, color: ColorsManager.mainBlue),
+          ),
+        if (secondNumber != null)
+          Text(
+            '${Provider.of<GameProvider>(context, listen: false).operation == 'Add' ? '+' : '-'} ${isArabic ? ConvertToArabicNumbers.convertToArabicNumbers(secondNumber.toString()) : secondNumber}', // عرض الرقم الثاني مع علامة الجمع أو الطرح
+            style: TextStyle(fontSize: 250.sp, color: ColorsManager.mainBlue),
+          ),
+      ],
     );
   }
 }

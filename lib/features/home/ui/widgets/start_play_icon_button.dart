@@ -7,6 +7,7 @@ import 'package:math_app/features/game/logic/providers/game_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/routing/routers.dart';
+import '../../../../generated/l10n.dart';
 
 class StartPlayIconButton extends StatelessWidget {
   const StartPlayIconButton({
@@ -27,11 +28,12 @@ class StartPlayIconButton extends StatelessWidget {
       ),
       onPressed: () {
         if (provider.operationsCount <= 2) {
-          showSnackBarEror(context, 'Operation count should be more or equal 2');
+          showSnackBarEror(
+              context, S.of(context).feature_start_test_operation_count_error);
         } else if (provider.numbersSpeed < 1) {
-          showSnackBarEror(context, 'Number speed should be more or equal 1');
-        } 
-         else {
+          showSnackBarEror(
+              context, S.of(context).feature_start_test_numbers_speed_error);
+        } else {
           context.pushReplacementNamed(Routes.gameScreen);
         }
       },

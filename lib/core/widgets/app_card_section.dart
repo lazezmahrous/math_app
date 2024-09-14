@@ -37,8 +37,6 @@ class AppCardSection extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.bottomRight,
-            // // transform: const GradientRotation(.5),
-            // stops: const <double>[.5, 1.0],
             colors: colors!,
           ),
         ),
@@ -59,7 +57,7 @@ class AppCardSection extends StatelessWidget {
               ),
               Positioned(
                 left: 0,
-                top: 25.h,
+                top: 25,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Container(
@@ -67,7 +65,7 @@ class AppCardSection extends StatelessWidget {
                         maxWidth: 100.w,
                       ),
                       child: Text(
-                        sectionName!,
+                        sectionName ?? 'eeeeeeee',
                         style: TextStyles.font22WhiteExtraBold,
                       )),
                 ),

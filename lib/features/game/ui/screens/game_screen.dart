@@ -15,12 +15,11 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SafeArea(
-        child: FlashTimingNumbersWidget(),
+        child: Center(child: FlashTimingNumbersWidget()),
       ),
     );
   }

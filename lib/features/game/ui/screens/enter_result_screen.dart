@@ -1,12 +1,16 @@
-import 'package:cart_stepper/cart_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:math_app/core/helpers/extensions.dart';
 import 'package:math_app/core/helpers/spacing.dart';
+import 'package:math_app/core/logic/provider/language_provider.dart';
+import 'package:math_app/features/game/logic/providers/game_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/routing/routers.dart';
+import '../../../../core/services/convert_to_arabic_numbers.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
+import '../../../../generated/l10n.dart';
 
 class EnterResultScreen extends StatefulWidget {
   const EnterResultScreen({super.key, required this.result});
@@ -18,7 +22,7 @@ class EnterResultScreen extends StatefulWidget {
 
 class _EnterResultScreenState extends State<EnterResultScreen> {
   List<int> levelOnerandomNumbers = [0, 1, 2, 3, 4, 5];
-  List<int> levelTowrandomNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  List<int> levelTowrandomNumbers = [6, 7, 8, 9];
 
   @override
   void initState() {
@@ -47,6 +51,10 @@ class _EnterResultScreenState extends State<EnterResultScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider =
+        Provider.of<LanguageProvider>(context, listen: false);
+    final gameProvider = Provider.of<GameProvider>(context, listen: false);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -57,7 +65,7 @@ class _EnterResultScreenState extends State<EnterResultScreen> {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Choose the Result :',
+                    S.of(context).feature_enter_result_header,
                     style: TextStyles.font25BlueBold,
                   ),
                   verticalSpace(40),
@@ -65,7 +73,7 @@ class _EnterResultScreenState extends State<EnterResultScreen> {
                     height: 500.h,
                     child: GridView.builder(
                       shrinkWrap: true,
-                      itemCount: 4, // عرض 4 خيارات فقط
+                      itemCount: 4,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2),
@@ -91,7 +99,7 @@ class _EnterResultScreenState extends State<EnterResultScreen> {
                             ),
                             child: Center(
                               child: Text(
-                                '${levelOnerandomNumbers[index]}',
+                                '${languageProvider.currentLanguage == 'ar' ? ConvertToArabicNumbers.convertToArabicNumbers('${gameProvider.level == 'levelOne' ? levelOnerandomNumbers[index] : levelTowrandomNumbers[index]}') : gameProvider.level == 'levelOne' ? levelOnerandomNumbers[index] : levelTowrandomNumbers[index]}',
                                 style: TextStyles.font22WhiteExtraBold,
                               ),
                             ),

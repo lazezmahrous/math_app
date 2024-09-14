@@ -17,9 +17,11 @@ class SettingsOfGameWidget extends StatelessWidget {
     return Consumer<GameProvider>(
       builder: (context, provider, child) {
         int counter = 0;
-        if (sectionName == 'Operation Count') {
+        if (sectionName == 'Operations Count' ||
+            sectionName == 'عدد العمليات') {
           counter = provider.operationsCount;
-        } else if (sectionName == 'Numbers Speed') {
+        } else if (sectionName == 'Numbers Speed' ||
+            sectionName == 'سرعة عرض الأرقام') {
           counter = provider.numbersSpeed;
         }
         return Container(
@@ -41,10 +43,12 @@ class SettingsOfGameWidget extends StatelessWidget {
                     stepper: 1,
                     size: 35.w,
                     didChangeCount: (count) {
-                      if (count <= 5) {
-                        if (sectionName == 'Operation Count') {
+                      if (count <= 10) {
+                        if (sectionName == 'Operations Count' ||
+                            sectionName == 'عدد العمليات') {
                           provider.setOperationsCount(count);
-                        } else if (sectionName == 'Numbers Speed') {
+                        } else if (sectionName == 'Numbers Speed' ||
+                            sectionName == 'سرعة عرض الأرقام') {
                           provider.setNumbersSpeed(count);
                         }
                       } else {

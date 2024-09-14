@@ -4,17 +4,17 @@ import 'package:math_app/features/game/ui/screens/enter_result_screen.dart';
 import 'package:math_app/features/game/ui/screens/failure_screen.dart';
 import 'package:math_app/features/game/ui/screens/success_screen.dart';
 import 'package:math_app/features/learn_counter/ui/screens/learn_counter.dart';
-import 'package:math_app/features/stories/logic/providers/story_provider.dart';
 import 'package:math_app/features/stories/ui/screens/play_and_reading_story.dart';
 import 'package:math_app/features/stories/ui/screens/stories.dart';
-import 'package:provider/provider.dart';
-import '../../features/game/ui/screens/game_screen.dart';
+ import '../../features/game/ui/screens/game_screen.dart';
 import '../../features/home/ui/screens/home_screen.dart';
 import '../../features/onboarding/ui/screens/onboarding_screen.dart';
+import '../../features/settings/ui/screens/settings_screen.dart';
 import '../../features/start_test/ui/screen/start_test.dart';
 
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
+    print(settings.name);
     switch (settings.name) {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
@@ -60,6 +60,10 @@ class AppRouter {
       case Routes.startTest:
         return MaterialPageRoute(
           builder: (_) => const StartTest(),
+        );
+      case Routes.settingsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const SettingsScreen(),
         );
       default:
         return MaterialPageRoute(

@@ -4,6 +4,10 @@ import 'package:math_app/core/theming/colors.dart';
 import 'package:math_app/core/theming/font_weight_helper.dart';
 
 class TextStyles {
+  TextStyles() {
+    print('textStyles');
+  }
+
   static TextStyle font24BlackBold = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeightHelper.bold,
@@ -79,6 +83,11 @@ class TextStyles {
     fontSize: 12.sp,
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.mainBlue,
+  );
+  static TextStyle font12WhiteRegular = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: Colors.white,
   );
 
   static TextStyle font13BlueRegular = TextStyle(

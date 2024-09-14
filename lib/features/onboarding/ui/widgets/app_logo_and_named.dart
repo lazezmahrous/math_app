@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theming/styles.dart';
+import '../../../../generated/l10n.dart';
 
 class AppLogoAndNamed extends StatelessWidget {
   const AppLogoAndNamed({super.key});
@@ -19,7 +20,7 @@ class AppLogoAndNamed extends StatelessWidget {
           width: 10.w,
         ),
         Text(
-          'تأسيس الرياضيات',
+          S.of(context).onboard_title,
           style: TextStyles.font24BlackBold,
         ),
       ],

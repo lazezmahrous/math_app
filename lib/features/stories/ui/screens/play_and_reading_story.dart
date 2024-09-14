@@ -11,6 +11,7 @@ import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 import '../../../../core/widgets/app_back_button.dart';
 import '../../../../core/widgets/app_play_video_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../../logic/providers/audio_player_provider.dart';
 
 class PlayAndReadingStory extends StatefulWidget {
@@ -21,49 +22,56 @@ class PlayAndReadingStory extends StatefulWidget {
 }
 
 class _PlayAndReadingStoryState extends State<PlayAndReadingStory> {
-  bool _isConnected = false;
-  List<ConnectivityResult> _connectionStatus = [ConnectivityResult.none];
-  final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
+  // bool _isConnected = false;
+  // List<ConnectivityResult> _connectionStatus = [ConnectivityResult.none];
+  // final Connectivity _connectivity = Connectivity();
+  // late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
+  late AudioPlayerProvider _audioPlayerProvider;
 
   @override
-  void initState() {
-    super.initState();
-    initConnectivity();
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _audioPlayerProvider =
+        Provider.of<AudioPlayerProvider>(context, listen: false);
   }
 
-  @override
-  void dispose() {
-    _connectivitySubscription.cancel();
-    Provider.of<AudioPlayerProvider>(context).stop();
-    super.dispose();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   initConnectivity();
+  //   _connectivitySubscription =
+  //       _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+  // }
 
-  Future<void> initConnectivity() async {
-    late List<ConnectivityResult> result;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      result = await _connectivity.checkConnectivity();
-    } on PlatformException catch (e) {
-      print('Couldn\'t check connectivity status ${e.code}');
-      return;
-    }
-    if (!mounted) {
-      return;
-    }
+  // @override
+  // void dispose() {
+  //   _connectivitySubscription.cancel();
+  //   _audioPlayerProvider.stop(); // Use the saved reference here
+  //   super.dispose();
+  // }
 
-    _updateConnectionStatus(result);
-  }
+  // Future<void> initConnectivity() async {
+  //   late List<ConnectivityResult> result;
+  //   try {
+  //     result = await _connectivity.checkConnectivity();
+  //   } on PlatformException catch (e) {
+  //     print('Couldn\'t check connectivity status ${e.code}');
+  //     return;
+  //   }
+  //   if (!mounted) {
+  //     return;
+  //   }
 
-  void _updateConnectionStatus(List<ConnectivityResult> result) {
-    setState(() {
-      _connectionStatus = result;
-      _isConnected = result.first != ConnectivityResult.none ? true : false;
-    });
-    print('Connectivity changed: $_connectionStatus');
-  }
+  //   _updateConnectionStatus(result);
+  // }
+
+  // void _updateConnectionStatus(List<ConnectivityResult> result) {
+  //   setState(() {
+  //     _connectionStatus = result;
+  //     _isConnected = result.first != ConnectivityResult.none ? true : false;
+  //   });
+  //   print('Connectivity changed: $_connectionStatus');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,15 +83,17 @@ class _PlayAndReadingStoryState extends State<PlayAndReadingStory> {
               return Padding(
                 padding: EdgeInsets.all(16.0.w),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
                           Container(
-                            width: 300.w,
-                            height: 600.h,
+                            constraints: BoxConstraints(
+                              maxWidth: 300.w,
+                              maxHeight: 600.h,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20.r),
                               gradient: LinearGradient(
@@ -153,35 +163,6 @@ class _PlayAndReadingStoryState extends State<PlayAndReadingStory> {
                             ),
                           ),
                           SizedBox(width: 16.w),
-                          _isConnected
-                              ? SizedBox(
-                                  width: 300.w,
-                                  height: 600.h,
-                                  child: VideoPlayerScreen(
-                                    storyLink: storyProvider.story.videoLink,
-                                  ),
-                                )
-                              : Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        Icon(
-                                          Icons.wifi_off_rounded,
-                                          color: Colors.red,
-                                          size: 300.w,
-                                        ),
-                                        Text(
-                                          'إتصل بالإنترنت لمشاهدة القصه فيديو',
-                                          style: TextStyle(
-                                            fontSize: 18.sp,
-                                            color: Colors.red,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
                         ],
                       ),
                     ),
