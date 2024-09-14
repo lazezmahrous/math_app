@@ -1,27 +1,33 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class GameNumbersModel {
-  // int rundomNumber = 0;
-  // int operationsCount = 0;
-  // GameNumbersModel({
-  //   required this.rundomNumber,
-  //   required this.operationsCount,
-  // });
-
   Map<int, List<int>> zeroToFiveAdditionOperations = {
-    0: [0, 1, 2, 3, 4, 5],
+    0: [1, 2, 3, 4, 5],
     1: [0, 1, 2, 3, 4],
-    2: [0, 1, 2, 3],
-    3: [0, 1, 2],
-    4: [0, 1],
+    2: [1, 2, 3],
+    3: [1, 2],
+    4: [1],
     5: [0],
   };
   Map<int, List<int>> zeroToFiveSubtractionOperations = {
-    5: [0, 1, 2, 3, 4, 5],
-    4: [0, 1, 2, 3, 4],
-    3: [0, 1, 2, 3],
-    2: [0, 1, 2],
-    1: [0, 1],
-    0: [0],
+    5: [0, 2, 3, 4, 5],
+    4: [1, 2, 3, 4],
+    3: [1, 2, 3],
+    2: [1, 2],
+    1: [1],
+    0: [0]
+  };
+
+  Map<int, List<int>> sixToNineAdditionOperations = {
+    6: [1, 2, 3],
+    7: [1, 2],
+    8: [1],
+    9: [0],
+  };
+  Map<int, List<int>> sixToNineSubtractionOperations = {
+    6: [0],
+    7: [1],
+    8: [1, 2],
+    9: [1, 2],
   };
 
   int makeSubtractionGameNumbers(

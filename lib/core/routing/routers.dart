@@ -9,4 +9,5 @@ class Routes {
   static const String learnCounter = '/learnCounter';
   static const String stories = '/stories';
   static const String readingStory = '/readingStory';
+  static const String settingsScreen = '/settingsScreen';
 }

@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/theming/styles.dart';
 import '../../../../core/widgets/app_appbar.dart';
 import '../../../../core/widgets/app_back_button.dart';
+import '../../../../generated/l10n.dart';
 
 class Stories extends StatelessWidget {
   Stories({super.key});
@@ -72,7 +73,7 @@ class Stories extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Text(
-              'Stories to teach addition (+): ',
+              S.of(context).home_feature_stories_learn_addition_header,
               style: TextStyles.font18DarkBlueSemiBold,
             ),
           ),
@@ -104,7 +105,7 @@ class Stories extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Text(
-              'Stories to teach Subtraction (-): ',
+              S.of(context).home_feature_stories_learn_subtraction_header,
               style: TextStyles.font18DarkBlueSemiBold,
             ),
           ),

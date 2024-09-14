@@ -4,6 +4,7 @@ import 'package:math_app/core/widgets/app_divider.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/widgets/app_appbar.dart';
+import '../../../../generated/l10n.dart';
 import '../../../home/ui/widgets/select_level.dart';
 import '../../../home/ui/widgets/select_operation.dart';
 import '../../../home/ui/widgets/settings_section_of_game_widget.dart';
@@ -27,15 +28,15 @@ class StartTest extends StatelessWidget {
                   width: 300.w,
                 ),
                 const AppDivder(),
-                const SettingsOfGameWidget(
-                  sectionName: 'Operation Count',
+                SettingsOfGameWidget(
+                  sectionName: S.of(context).feature_start_test_operation_count,
                 ),
                 verticalSpace(20),
-                const SettingsOfGameWidget(
-                  sectionName: 'Numbers Speed',
+                SettingsOfGameWidget(
+                  sectionName: S.of(context).feature_start_test_numbers_speed,
                 ),
-                verticalSpace(20),
-                const SelectOperation(),
+                // verticalSpace(20),
+                // const SelectOperation(),
                 verticalSpace(20),
                 const SelectLevel(),
               ],

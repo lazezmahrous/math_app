@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:math_app/core/services/play_sound.dart';
 import 'package:math_app/core/theming/colors.dart';
@@ -16,6 +17,22 @@ void showSnackBarEror(context, String message) {
       ),
     ),
   ));
+}
+
+void showToast({required String message , required bool isError}) {
+  PlaySound.play_sound(
+    soundSource: 'sounds/notifcation.mp3',
+  );
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.TOP,
+    timeInSecForIosWeb: 1,
+    backgroundColor:
+        isError ?  ColorsManager.pink : ColorsManager.green ,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
 }
 
 void showSnackBarBlue(BuildContext context, String message) {

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/services/play_sound.dart';
 import '../../../../core/theming/colors.dart';
+import '../../../../generated/l10n.dart';
 import '../../logic/providers/game_provider.dart';
 import '../widgets/success_screen_item_widget.dart';
 
@@ -48,8 +49,8 @@ class _SuccessScreenState extends State<SuccessScreen> {
                   children: [
                     Image.asset('assets/gifs/success.gif'),
                     verticalSpace(50),
-                    const Text(
-                      'Success!',
+                    Text(
+                      S.of(context).feature_success_screen,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 40,

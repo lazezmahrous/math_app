@@ -4,6 +4,7 @@ import 'package:math_app/core/helpers/extensions.dart';
 import 'package:math_app/core/helpers/spacing.dart';
 import '../../../../core/routing/routers.dart';
 import '../../../../core/widgets/app_gradient_button.dart';
+import '../../../../generated/l10n.dart';
 
 class SuccessScreenItemWidget extends StatefulWidget {
   const SuccessScreenItemWidget({super.key});
@@ -20,10 +21,9 @@ class _SuccessScreenItemWidgetState extends State<SuccessScreenItemWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          flex: 2,
           child: AppGradientButton(
             size: Size(20.w, 40.h),
-            text: 'Home',
+            text: S.of(context).feature_success_and_failure_screen_button_one,
             onPressed: () {
               context.pushNamedAndRemoveUntil(
                 Routes.homeScreen,
@@ -35,8 +35,8 @@ class _SuccessScreenItemWidgetState extends State<SuccessScreenItemWidget> {
         horizontalSpace(10.w),
         Expanded(
           child: AppGradientButton(
-            size: Size(20.w, 40.h),
-            text: 'Play Again',
+            size: Size(40.w, 40.h),
+            text: S.of(context).feature_success_and_failure_screen_button_tow,
             onPressed: () {
               context.pushReplacementNamed(Routes.gameScreen);
             },
